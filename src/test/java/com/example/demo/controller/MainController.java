@@ -8,7 +8,7 @@ public class MainController {
 
     @RequestMapping("/")
     public String result() {
-    	
+    	System.out.println("test");
         return "Hello World!";
     }
 }
