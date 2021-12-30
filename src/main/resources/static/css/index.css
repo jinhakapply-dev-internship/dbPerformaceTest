@@ -65,10 +65,15 @@ body {
 }
 
 #main-container>button>img {
-    margin-right: 10px;
+    margin: 0 10px 0 13px;
 }
 
 #main-container>button>span,
 #main-container>button>img {
-    display: inline-block;
+    float: left;
+    display: block;
+}
+
+#main-container>button>span {
+    font-family: 'NanumSquareRound';
 }
