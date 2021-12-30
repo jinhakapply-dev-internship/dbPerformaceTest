@@ -22,32 +22,76 @@ body {
     padding: 40px;
 
     border-radius: 10px;
-    text-align: center;
 }
 
+
 .emp-text {
+    font-family: 'NanumSquareRound';
     font-size: 32px;
     font-weight: 800;
+}
+
+.plain-text {
+    font-size: 18px;
+    line-height: 27px;
+    color: var(--gray);
 }
 
 .bg-white {
     background-color: #fff;
 }
 
-#main-container>h1 {
+/* ------------------------------------- */
+/* 결과 확인 전 화면 */
+
+.before-result-container {
+    text-align: center;
+    /* display: none; */
+}
+
+.before-result-container>h1 {
     margin: 15px 0 30px 0;
 }
 
-#main-container>span {
+.before-result-container>span {
     display: block;
     margin-top: 40px;
-
-    font-size: 18px;
-    line-height: 27px;
-    color: var(--gray);
 }
 
-#main-container button {
+/* ------------------------------------- */
+/* 결과 확인 화면 */
+
+.after-result-container {
+    text-align: center;
+    display: none;
+}
+
+.after-result-container>h1.emp-text {
+    margin-bottom: 30px;
+}
+
+.result-text-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 15px 10px;
+
+    width: fit-content;
+    margin: 30px auto 15px auto;
+}
+
+.result-text-container>span:not(.result-text) {
+    font-weight: 800;
+}
+
+.result-text-container span.result-text {
+    text-decoration: underline;
+}
+
+/* ------------------------------------- */
+/* 공통적으로 사용하는 버튼 스타일 */
+
+.excute-btn,
+.re-excute-btn {
     width: 230px;
     height: 80px;
     margin-top: 40px;
@@ -58,22 +102,29 @@ body {
     color: var(--main-color);
 }
 
-#main-container button:hover {
+.excute-btn:hover,
+.re-excute-btn:hover {
     background-color: var(--main-color);
     color: #fff;
     transition: 0.3s;
 }
 
-#main-container>button>img {
-    margin: 0 10px 0 13px;
-}
-
-#main-container>button>span,
-#main-container>button>img {
+.excute-btn>span,
+.excute-btn>img,
+.re-excute-btn>span,
+.re-excute-btn>img {
     float: left;
     display: block;
 }
 
-#main-container>button>span {
-    font-family: 'NanumSquareRound';
+.excute-btn>img {
+    margin: 0 10px 0 13px;
+}
+
+.re-excute-btn>img {
+    margin: 0 10px 0 24px;
+}
+
+.re-excute-btn>span {
+    margin-top: 13px;
 }
