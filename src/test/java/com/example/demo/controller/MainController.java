@@ -9,6 +9,10 @@ public class MainController {
     @RequestMapping("/")
     public String result() {
     	
-        return "Hello World!";
+    	float min = 0;
+    	float max = 0;
+    	float avg = 0;
+    	String result = "max:"+max+"min:"+min+"avg"+avg;
+        return result;
     }
 }
