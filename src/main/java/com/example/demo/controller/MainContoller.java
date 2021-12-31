@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class MainContoller {
 	@RequestMapping(value="/")
 	public String index() {
-		//System.out.println("hayeom");		
+		//System.out.println("hayeon");		
 		return "index";
 	}
 
