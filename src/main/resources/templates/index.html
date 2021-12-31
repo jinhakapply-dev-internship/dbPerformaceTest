@@ -8,17 +8,44 @@
     <title>DB 성능 테스트</title>
     <link rel="stylesheet" href="../static/css/reset.css">
     <link rel="stylesheet" href="../static/css/index.css">
+    <script defer src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+    <script defer src="../static/js/index.js"></script>
 </head>
 
 <body>
     <section id="main-container" class="bg-white">
-        <h1 class="emp-text">DB 성능 테스트</h1>
-        <img src="../static/img/main-img.svg" alt="메인 이미지">
-        <span>실행 시작 버튼을 누르면 DataBase에서<br />하나의 프로시저를 실행할 때 걸리는 시간을 알 수 있습니다.</span>
-        <button class="bg-white">
-            <img src="../static/img/run-icon.svg" alt="실행 시작 아이콘">
-            <span class="emp-text">실행 시작</span>
-        </button>
+        <div class="before-result-container">
+            <h1 class="emp-text">DB 성능 테스트</h1>
+            <img src="../static/img/main-img.svg" alt="메인 이미지">
+            <span class="plain-text">실행 시작 버튼을 누르면 DataBase에서<br />하나의 프로시저를 실행할 때 걸리는 시간을 알 수 있습니다.</span>
+            <button class="excute-btn bg-white">
+                <img src="../static/img/run-icon.svg" alt="실행 시작 아이콘">
+                <span class="emp-text">실행 시작</span>
+            </button>
+        </div>
+        <div class="after-result-container">
+            <h1 class="emp-text">DB 성능 테스트</h1>
+            <span class="plain-text">하나의 프로시저 실행 결과, 소요 시간은 아래와 같습니다.</span>
+            <div class="result-text-container">
+                <span>최대 소요 시간</span>
+                <span class="result-text"></span>
+                <span>평균 소요 시간</span>
+                <span class="result-text"></span>
+                <span>최소 소요 시간</span>
+                <span class="result-text"></span>
+            </div>
+            <button class="re-excute-btn bg-white">
+                <img src="../static/img/refresh-icon.svg" alt="실행 시작 아이콘">
+                <span class="emp-text">재실행</span>
+            </button>
+        </div>
+        <div class="loading-container">
+            <h1 class="emp-text">서버에서 데이터를 받아오고 있습니다...</h1>
+            <lottie-player src="../static/img/loading-icon.json" background="transparent" speed="1"
+                style="width: 300px; height: 300px;" loop autoplay>
+            </lottie-player>
+        </div>
     </section>
 </body>
 

@@ -13,6 +13,7 @@
 body {
     background-color: #000;
     font-family: 'NanumSquareRound' !important;
+    text-align: center;
 }
 
 #main-container {
@@ -22,32 +23,75 @@ body {
     padding: 40px;
 
     border-radius: 10px;
-    text-align: center;
 }
 
+/* ------------------------------------- */
+/* class 정의 */
+
 .emp-text {
+    font-family: 'NanumSquareRound';
     font-size: 32px;
     font-weight: 800;
+}
+
+.plain-text {
+    font-size: 18px;
+    line-height: 27px;
+    color: var(--gray);
 }
 
 .bg-white {
     background-color: #fff;
 }
 
-#main-container>h1 {
+
+.before-result-container>h1.emp-text,
+.after-result-container>h1.emp-text {
     margin: 15px 0 30px 0;
 }
 
-#main-container>span {
-    display: block;
-    margin-top: 40px;
 
-    font-size: 18px;
-    line-height: 27px;
-    color: var(--gray);
+/* ------------------------------------- */
+/* 결과 확인 전 컨테이너 */
+
+.before-result-container {
+    /* display: none; */
 }
 
-#main-container button {
+.before-result-container>span {
+    display: block;
+    margin-top: 40px;
+}
+
+/* ------------------------------------- */
+/* 결과 확인 컨테이너 */
+
+.after-result-container {
+    display: none;
+}
+
+.result-text-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 15px 10px;
+
+    width: fit-content;
+    margin: 60px auto 30px auto;
+}
+
+.result-text-container>span:not(.result-text) {
+    font-weight: 800;
+}
+
+.result-text-container span.result-text {
+    text-decoration: underline;
+}
+
+/* ------------------------------------- */
+/* 공통적으로 사용하는 버튼 스타일 */
+
+.excute-btn,
+.re-excute-btn {
     width: 230px;
     height: 80px;
     margin-top: 40px;
@@ -58,22 +102,44 @@ body {
     color: var(--main-color);
 }
 
-#main-container button:hover {
+.excute-btn:hover,
+.re-excute-btn:hover {
     background-color: var(--main-color);
     color: #fff;
     transition: 0.3s;
 }
 
-#main-container>button>img {
-    margin: 0 10px 0 13px;
-}
-
-#main-container>button>span,
-#main-container>button>img {
+.excute-btn>span,
+.excute-btn>img,
+.re-excute-btn>span,
+.re-excute-btn>img {
     float: left;
     display: block;
 }
 
-#main-container>button>span {
-    font-family: 'NanumSquareRound';
+.excute-btn>img {
+    margin: 0 10px 0 13px;
+}
+
+.re-excute-btn>img {
+    margin: 0 10px 0 24px;
+}
+
+.re-excute-btn>span {
+    margin-top: 13px;
+}
+
+/* ------------------------------------- */
+/* 로딩 컨테이너 */
+
+.loading-container {
+    display: none;
+}
+
+.loading-container>h1 {
+    margin-top: 23%;
+}
+
+lottie-player {
+    margin: 0 auto;
 }
