@@ -1,12 +1,13 @@
 package com.example.demo.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.demo.db.DBAdaptor;
 import com.example.demo.dto.DTO;
 
-
+@CrossOrigin(origins = "http://localhost:8080")
 @Controller
 public class MainContoller {
 	
