@@ -33,4 +33,13 @@ window.onload = function () {
         // after.style.display = "block";
 
     })
+    
+    reExcuteBtn.addEventListener("click", ()=> {
+		max, min, avg = 0;
+		
+        before.style.display = "block";
+        after.style.display = "none";
+        loading.style.display = "none";
+
+	})
 }
