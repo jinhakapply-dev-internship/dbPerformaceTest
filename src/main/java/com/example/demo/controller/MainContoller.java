@@ -4,6 +4,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.demo.db.DBAdaptor;
+import com.example.demo.dto.DTO;
+
 
 @Controller
 public class MainContoller {
@@ -16,13 +18,16 @@ public class MainContoller {
 	}
 	
 	@RequestMapping(value="/click")
-	public String click() {
+	public DTO click() {
 		double result[] = new double[3];
 		int execution_count = 10000;
 		result = DB.getProcedureExecutionStatistics(execution_count);
-		String res_str = "max:"+result[0]+","+"min:"+result[1]+","+"avg:"+result[2];
-		//System.out.println("hayeon");		
-		return "res_str";
+		DTO minmaxavg = new DTO();
+		minmaxavg.setMin(result[0]);
+		minmaxavg.setMax(result[1]);
+		minmaxavg.setAvg(result[2]);
+		System.out.println("minmaxavg:" + minmaxavg);		
+		return minmaxavg;
 	}
 
 }
