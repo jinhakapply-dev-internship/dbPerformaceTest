@@ -26,7 +26,7 @@ window.onload = function() {
 
 
 	const apiConnect = async () => {
-		await axios.get('localhost:8080/click').then(response => console.log(response));
+		await axios.get('http://localhost:8080/click').then(response => console.log(response));
 	}
 
 	excuteBtn.addEventListener("click", () => {
