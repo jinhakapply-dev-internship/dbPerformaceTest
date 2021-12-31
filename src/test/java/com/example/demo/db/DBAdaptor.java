@@ -2,6 +2,8 @@ package com.example.demo.db;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.CallableStatement;
 
 import org.junit.Test;
 
@@ -11,10 +13,19 @@ public class DBAdaptor {
 	private static final String USER = "root";
 	private static final String PW = "1234";
 
-	DBAdaptor() throws Exception {
+	// JDBC Objects
+	private Connection con = null;
+	private ResultSet rs = null;
+	private CallableStatement cs = null;
+
+	// Constants
+	private static final double DOUBLE_MAX = 99999999999999.0;
+
+	public DBAdaptor() throws Exception {
 		Class.forName(Driver);
 
-		try (Connection con = DriverManager.getConnection(URL, USER, PW)) {
+		try {
+			this.setCon(DriverManager.getConnection(URL, USER, PW));
 			System.out.println("Success");
 		} catch (Exception e) {
 			System.out.println(e);
@@ -23,30 +34,99 @@ public class DBAdaptor {
 
 	}
 
-	private void executeProcedure() throws Exception {
+	// 프로시저 1회 실행
+	public void executeProcedure() throws Exception {
+		try {
+			this.setCs(con.prepareCall("{call dbo.uspGetManagerEmployees(?)}"));
 
+			int random_val = (int) (Math.random() * 15);
+			cs.setInt(1, random_val);
+
+			this.setRs(cs.executeQuery());
+		} catch (Exception e) {
+			System.out.println(e);
+		}
 	}
 
+	// 프로시저 실행에 걸리는 시간을 계산한다
+	public double getProcedureExecutionTime() throws Exception {
 
-	private double getProcedureExecutionTime() throws Exception {
-		double execute_time = 0.0;
+		long start = System.currentTimeMillis();
+		this.executeProcedure();
+		long end = System.currentTimeMillis();
 
-		return execute_time;
 
+		return (double) (end - start);
 	}
 
-	public double[] getProcedureExecutionStatstics(int execution_time) {
+	public double[] getProcedureExecutionStatistics(int execution_count) {
 		double min = 0.0;
-		double max = 0.0;
+		double max = DBAdaptor.DOUBLE_MAX;
 		double avg = 0.0;
+
+		int i = 0;
+
+		for (i = 0; i < execution_count; i++) {
+			try {
+				double exe_time = this.getProcedureExecutionTime();
+
+				if (exe_time < min) {
+					min = exe_time;
+				} else if (exe_time > max) {
+					max = exe_time;
+				}
+
+				avg += exe_time;
+
+			} catch (Exception e) {
+				System.out.println(e);
+			}
+		}
 
 		double execution_info[] = new double[3];
 
 		execution_info[0] = min;
-		execution_info[1] = avg;
+		execution_info[1] = avg / (double) execution_count;
 		execution_info[2] = max;
 
 		return execution_info;
+	}
+
+
+	public Connection getCon() {
+		return con;
+	}
+
+	public void setCon(Connection con) {
+		this.con = con;
+	}
+
+	/**
+	 * @return the cs
+	 */
+	public CallableStatement getCs() {
+		return cs;
+	}
+
+	/**
+	 * @param cs the cs to set
+	 */
+	public void setCs(CallableStatement cs) {
+		this.cs = cs;
+	}
+
+	/**
+	 * @return the rs
+	 */
+	public ResultSet getRs() {
+		return rs;
+	}
+
+	/**
+	 * @param rs the rs to set
+	 */
+	public void setRs(ResultSet rs) {
+		this.rs = rs;
 	}
 
 }
