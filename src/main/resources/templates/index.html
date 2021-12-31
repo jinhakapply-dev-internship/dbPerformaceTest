@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="../static/css/reset.css">
     <link rel="stylesheet" href="../static/css/index.css">
     <script defer src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
     <script defer src="../static/js/index.js"></script>
 </head>
 
@@ -25,16 +26,25 @@
         </div>
         <div class="after-result-container">
             <h1 class="emp-text">DB 성능 테스트</h1>
-            <span class="plain-text">테스트 결과, 소요 시간은 아래와 같습니다.</span>
+            <span class="plain-text">하나의 프로시저 실행 결과, 소요 시간은 아래와 같습니다.</span>
             <div class="result-text-container">
                 <span>최대 소요 시간</span>
+                <span class="result-text"></span>
                 <span>평균 소요 시간</span>
+                <span class="result-text"></span>
                 <span>최소 소요 시간</span>
+                <span class="result-text"></span>
             </div>
             <button class="re-excute-btn bg-white">
                 <img src="../static/img/refresh-icon.svg" alt="실행 시작 아이콘">
                 <span class="emp-text">재실행</span>
             </button>
+        </div>
+        <div class="loading-container">
+            <h1 class="emp-text">서버에서 데이터를 받아오고 있습니다...</h1>
+            <lottie-player src="../static/img/loading-icon.json" background="transparent" speed="1"
+                style="width: 300px; height: 300px;" loop autoplay>
+            </lottie-player>
         </div>
     </section>
 </body>
