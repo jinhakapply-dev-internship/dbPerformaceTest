@@ -5,7 +5,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.CallableStatement;
 
-import org.junit.Test;
+//import org.junit.Test;
 
 public class DBAdaptor {
 	private static final String Driver = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
@@ -21,7 +21,7 @@ public class DBAdaptor {
 	// Constants
 	private static final double DOUBLE_MAX = 99999999999999.0;
 
-	public DBAdaptor(){
+	public DBAdaptor() {
 	}
 
 	public void connect() throws Exception {
@@ -53,9 +53,9 @@ public class DBAdaptor {
 	// 프로시저 실행에 걸리는 시간을 계산한다
 	private double getProcedureExecutionTime() throws Exception {
 
-		long start = System.currentTimeMillis();
+		long start = System.nanoTime();
 		this.executeProcedure();
-		long end = System.currentTimeMillis();
+		long end = System.nanoTime();
 
 		return (double) (end - start);
 	}
@@ -63,18 +63,21 @@ public class DBAdaptor {
 	// 프로시저 실행 결과의 통계정보 리턴
 	public double[] getProcedureExecutionStatistics(int execution_count) {
 		double min = DBAdaptor.DOUBLE_MAX;
-		double max = 0.0;
-		double avg = 0.0;
+		double max = 0.0000000;
+		double avg = 0.0000000;
 
 		int i = 0;
 
 		for (i = 0; i < execution_count; i++) {
 			try {
-				double exe_time = this.getProcedureExecutionTime();
+				double exe_time = this.getProcedureExecutionTime() / 1000000.0; // ms로 단위 변환
 
 				if (exe_time < min) {
 					min = exe_time;
-				} else if (exe_time > max) {
+
+				}
+
+				if (exe_time > max) {
 					max = exe_time;
 				}
 
@@ -88,11 +91,12 @@ public class DBAdaptor {
 		double execution_info[] = new double[3];
 
 		execution_info[0] = min;
-		execution_info[1] = avg / (double) execution_count;
+		execution_info[1] = (avg / (double) execution_count);
 		execution_info[2] = max;
 
 		return execution_info;
 	}
+
 
 	public Connection getCon() {
 		return con;
