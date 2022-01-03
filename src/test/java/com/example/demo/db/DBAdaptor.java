@@ -21,7 +21,10 @@ public class DBAdaptor {
 	// Constants
 	private static final double DOUBLE_MAX = 99999999999999.0;
 
-	public DBAdaptor() throws Exception {
+	DBAdaptor() throws Exception {
+	}
+
+	public void connect() throws Exception {
 		Class.forName(Driver);
 
 		try {
@@ -31,7 +34,6 @@ public class DBAdaptor {
 			System.out.println(e);
 			e.printStackTrace();
 		}
-
 	}
 
 	// 프로시저 1회 실행
@@ -55,10 +57,10 @@ public class DBAdaptor {
 		this.executeProcedure();
 		long end = System.currentTimeMillis();
 
-
 		return (double) (end - start);
 	}
 
+	// 프로시저 실행 결과의 통계정보 리턴
 	public double[] getProcedureExecutionStatistics(int execution_count) {
 		double min = 0.0;
 		double max = DBAdaptor.DOUBLE_MAX;
@@ -91,7 +93,6 @@ public class DBAdaptor {
 
 		return execution_info;
 	}
-
 
 	public Connection getCon() {
 		return con;
