@@ -18,20 +18,21 @@ public class RestConstroller {
 
 	@ResponseBody
 	@RequestMapping(value = "/click")
-	public String click() {
+	public DTO click() {
 		double result[] = new double[3];
 		int execution_count = 10000;
+
 		try {
 			DB.connect();
 		} catch (Exception e) {
-
+			System.out.println(e);
 		}
+
 		result = DB.getProcedureExecutionStatistics(execution_count);
 		DTO minmaxavg = new DTO();
 		minmaxavg.setMin(result[0]);
 		minmaxavg.setMax(result[1]);
 		minmaxavg.setAvg(result[2]);
-		//System.out.println("minmaxavg:" + minmaxavg);
-		return "dd";
+		return minmaxavg;
 	}
 }
