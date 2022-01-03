@@ -30,15 +30,14 @@ window.onload = function() {
 		showLoading();
 		try {
 			await axios.get('http://localhost:8080/click').then(response => {
-				max = response.data.max;
+				max = response.data.max.toString().slice(0, 6);
 				min = response.data.min;
 				avg = response.data.avg;
 				
-				maxSpan.innerText = max;
-				avgSpan.innerText = avg;
-				minSpan.innerText = min;
+				maxSpan.innerText = max + "ms";
+				avgSpan.innerText = avg + "ms";
+				minSpan.innerText = min + "ms";
 				
-				console.log(max, avg, min);
 			})
 		}
 		catch (e) { console.log(e); }
