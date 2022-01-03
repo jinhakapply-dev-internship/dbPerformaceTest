@@ -1,36 +1,55 @@
 'use-strict'
 
-window.onload = function () {
-    let max, min, avg = 0;
-    let isApiReturned = false;
+window.onload = function() {
+	let max, avg, min = 0;
 
-    let before = document.querySelector('.before-result-container');
-    let after = document.querySelector('.after-result-container');
-    let loading = document.querySelector('.loading-container');
-    let excuteBtn = document.querySelector('.excute-btn');
-    let reExcuteBtn = document.querySelector('.re-excute-btn');
+	const before = document.querySelector('.before-result-container');
+	const after = document.querySelector('.after-result-container');
+	const loading = document.querySelector('.loading-container');
+	const excuteBtn = document.querySelector('.excute-btn');
+	const reExcuteBtn = document.querySelector('.re-excute-btn');
+	
+	const maxSpan = document.querySelector('.max');
+	const avgSpan = document.querySelector('.avg');
+	const minSpan = document.querySelector('.min');
 
 
-    const showLoading = (isApiReturned, delay) => {
-        before.style.display = "none";
-        after.style.display = "none";
-        loading.style.display = "block";
+	const showLoading = () => {
+		before.style.display = "none";
+		after.style.display = "none";
+		loading.style.display = "block";
+	}
 
-        setTimeout(() => {
-            if (isApiReturned) {
-                after.style.display = "block";
-                loading.style.display = "none";
-            }
-        }, delay)
-    }
+	const showResult = () => {
+		after.style.display = "block";
+		loading.style.display = "none";
+	}
 
-    excuteBtn.addEventListener("click", () => {
 
-        isApiReturned = true;
-        showLoading(isApiReturned, 5000);
+	const apiConnect = async () => {
+		showLoading();
+		try {
+			await axios.get('http://localhost:8080/click').then(response => {
+				max = response.data.max.toString().slice(0, 6);
+				min = response.data.min;
+				avg = response.data.avg;
+				
+				maxSpan.innerText = max + "ms";
+				avgSpan.innerText = avg + "ms";
+				minSpan.innerText = min + "ms";
+				
+			})
+		}
+		catch (e) { console.log(e); }
+		finally { showResult(); }
+	}
 
-        // loading.style.display = "none";
-        // after.style.display = "block";
 
-    })
+	excuteBtn.addEventListener("click", () => {
+		apiConnect();
+	})
+	
+	reExcuteBtn.addEventListener("click", () => {
+		apiConnect();
+	})
 }
