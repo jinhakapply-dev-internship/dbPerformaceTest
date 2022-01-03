@@ -26,17 +26,17 @@ window.onload = function() {
 
 
 	const apiConnect = async () => {
-		await axios.get('http://localhost:8080/click').then(response => console.log(response));
+		await axios.get('http://localhost:8080/click').then(response => {
+			console.log(response);
+		})
 	}
 
 	excuteBtn.addEventListener("click", () => {
-    
+
 		// isApiReturned = true;
 		// showLoading(isApiReturned, 5000);
 
 		apiConnect();
 
-		// loading.style.display = "none";
-		// after.style.display = "block";
 	})
 }

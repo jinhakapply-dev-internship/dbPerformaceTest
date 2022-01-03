@@ -21,7 +21,7 @@ public class DBAdaptor {
 	// Constants
 	private static final double DOUBLE_MAX = 99999999999999.0;
 
-	DBAdaptor() throws Exception {
+	public DBAdaptor(){
 	}
 
 	public void connect() throws Exception {
