@@ -37,7 +37,7 @@ public class DBAdaptor {
 	}
 
 	// 프로시저 1회 실행
-	public void executeProcedure() throws Exception {
+	private void executeProcedure() throws Exception {
 		try {
 			this.setCs(con.prepareCall("{call dbo.uspGetManagerEmployees(?)}"));
 
@@ -51,7 +51,7 @@ public class DBAdaptor {
 	}
 
 	// 프로시저 실행에 걸리는 시간을 계산한다
-	public double getProcedureExecutionTime() throws Exception {
+	private double getProcedureExecutionTime() throws Exception {
 
 		long start = System.currentTimeMillis();
 		this.executeProcedure();
@@ -62,8 +62,8 @@ public class DBAdaptor {
 
 	// 프로시저 실행 결과의 통계정보 리턴
 	public double[] getProcedureExecutionStatistics(int execution_count) {
-		double min = 0.0;
-		double max = DBAdaptor.DOUBLE_MAX;
+		double min = DBAdaptor.DOUBLE_MAX;
+		double max = 0.0;
 		double avg = 0.0;
 
 		int i = 0;
